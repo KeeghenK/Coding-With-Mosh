@@ -1,0 +1,62 @@
+html {
+    font-size: 62.5%;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 5rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 #000;
+    word-spacing: 1.5rem;
+}
+
+.hero {
+    align-items: center;
+    background: url(Images/HubbleBanner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.hero .tagline {
+    background: rgba(0, 0, 0, 0.6);
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    padding: 1.5rem;
+}
+
+@media screen and (min-width: 725px) {
+        .hero {
+            background: url(Images/HubbleBanner@2.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+        .hero .tagline {
+            font-size: 3rem;
+        }
+} 
+
+@media screen and (min-width: 1024px) {
+        .hero {
+            background: url(Images/HubbleBanner@3.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+} 
+
+@media screen and (min-width: 1440px) {
+        .hero {
+            background: url(Images/HubbleBanner@4.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+} 
