@@ -1,3 +1,4 @@
+const auth = require('../Middleware/auth');
 const {Movie, validate} = require('../Modules/movie')
 const {Genre} = require('../Modules/genre')
 const mongoose = require('mongoose');
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
     res.send(Movies);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
 
