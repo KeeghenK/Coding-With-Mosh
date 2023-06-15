@@ -17,7 +17,7 @@ const Customer = mongoose.model('Customer', new mongoose.Schema({
         required: true,
         minlength: 8,
         maxlength: 15
-    },
+    }
 }));
 
 function validateCustomer(customer) {
