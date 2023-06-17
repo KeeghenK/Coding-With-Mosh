@@ -1,7 +1,6 @@
-const auth = require('../Middleware/auth');
-const {Rental, validate} = require('../Modules/rental'); 
-const {Movie} = require('../Modules/movie'); 
-const {Customer} = require('../Modules/customer'); 
+const {Rental, validate} = require('../Models/rental'); 
+const {Movie} = require('../Models/movie'); 
+const {Customer} = require('../Models/customer'); 
 const mongoose = require('mongoose');
 const Fawn = require('fawn');
 const express = require('express');
@@ -14,7 +13,7 @@ router.get('/', async (req, res) => {
   res.send(rentals);
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -38,13 +37,15 @@ router.post('/', auth, async (req, res) => {
       dailyRentalRate: movie.dailyRentalRate
     }
   });
+
   try {
     new Fawn.Task()
       .save('rentals', rental)
-      .update('movies', { _id: movie._id }, 
-      { $inc: { numberInStock: -1 }})
-    .run();
-
+      .update('movies', { _id: movie._id }, { 
+        $inc: { numberInStock: -1 }
+      })
+      .run();
+  
     res.send(rental);
   }
   catch(ex) {
