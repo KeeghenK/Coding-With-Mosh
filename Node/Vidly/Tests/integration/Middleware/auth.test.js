@@ -1,12 +1,14 @@
-const {User} = require('../../../models/user');
-const {Genre} = require('../../../models/genre');
+const {User} = require('../../../Models/user');
+const {Genre} = require('../../../Models/genre');
 const request = require('supertest');
 
 describe('auth middleware', () => {
+  let server;
+  
   beforeEach(() => { server = require('../../../index'); })
   afterEach(async () => { 
     await Genre.remove({});
-    server.close(); 
+    await server.close(); 
   });
 
   let token; 
