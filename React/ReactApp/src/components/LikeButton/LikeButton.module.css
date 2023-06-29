@@ -1,0 +1,13 @@
+.likeButton {
+  background-color: transparent;
+  border-width: 0px;
+  font-size: 1.5rem;
+}
+
+.fullLikeButton {
+  color: palevioletred;
+}
+
+.outlinedLikeButton {
+  color: #222;
+}
