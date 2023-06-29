@@ -1,0 +1,33 @@
+.alert {
+  display: flex;
+  justify-content: space-between;
+  color: #084298;
+  background-color: #cfe2ff;
+  border: 1px;
+  border-style: solid;
+  border-color: #b6d4fe;;
+  border-radius: 0.375rem;
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  box-sizing: content-box;
+  font-size: large;
+  border-width: 0px;
+  background-color: transparent;
+  width: 1em;
+  height: 1em;
+  color: black;
+  opacity: 0.5;
+  transition: opacity ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.75;
+}
+
+.button:focus {
+  opacity: 1;
+}
