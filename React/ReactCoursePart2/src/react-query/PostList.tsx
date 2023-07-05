@@ -1,13 +1,12 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import usePost from '../hooks/usePosts';
+import usePosts from '../hooks/usePosts';
 
 const PostList = () => {
   const pageSize = 10;
-  const { data, error, isLoading, fetchNextPage, isFetchingNextPage } = usePost(
-    { pageSize }
-  );
+  const { data, error, isLoading, fetchNextPage, isFetchingNextPage } =
+    usePosts({ pageSize });
 
   if (isLoading) return <p>Loading...</p>;
 
