@@ -3,21 +3,42 @@ import axios from 'axios';
 import { useRef } from 'react';
 import { Todo } from '../hooks/useTodos';
 
+interface AddTodoContext {
+  previousTodos: Todo[];
+}
+
 const TodoForm = () => {
   const queryClient = useQueryClient();
 
-  const addTodo = useMutation<Todo, Error, Todo>({
+  const addTodo = useMutation<Todo, Error, Todo, AddTodoContext>({
     mutationFn: (todo: Todo) =>
       axios
-        .post<Todo>('https://jsonplaceholder.typicode.com/todos', todo)
+        .post<Todo>('https://jsonplaceholder.typicode.com/todoxs', todo)
         .then((res) => res.data),
-    onSuccess: (saveTodo, newTodo) => {
+
+    onMutate: (newTodo: Todo) => {
+      const previousTodos = queryClient.getQueryData<Todo[]>(['todos']) || [];
+
       queryClient.setQueryData<Todo[]>(['todos'], (todos) => [
-        saveTodo,
+        newTodo,
         ...(todos || []),
       ]);
 
       if (ref.current) ref.current.value = '';
+
+      return { previousTodos };
+    },
+
+    onSuccess: (saveTodo, newTodo) => {
+      queryClient.setQueryData<Todo[]>(['todos'], (todos) =>
+        todos?.map((todo) => (todo === newTodo ? saveTodo : todo))
+      );
+    },
+
+    onError: (error, newTodo, context) => {
+      if (!context) return;
+
+      queryClient.setQueryData<Todo[]>(['todos'], context.previousTodos);
     },
   });
   const ref = useRef<HTMLInputElement>(null);
@@ -25,7 +46,7 @@ const TodoForm = () => {
   return (
     <>
       {addTodo.error && (
-        <div className="alert-danger">{addTodo.error.message}</div>
+        <div className="alert alert-danger">{addTodo.error.message}</div>
       )}
       <form
         className="row mb-3"
