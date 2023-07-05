@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { CACHE_KET_TODOS } from '../react-query/constants';
 
 export interface Todo {
   id: number;
@@ -15,7 +16,7 @@ const useTodos = () => {
     .then((res) => res.data);
 
     return useQuery<Todo[], Error>({
-      queryKey: ['todos'],
+      queryKey: CACHE_KET_TODOS,
       queryFn: fetchTodos,
       staleTime: 10 * 1000
     });
