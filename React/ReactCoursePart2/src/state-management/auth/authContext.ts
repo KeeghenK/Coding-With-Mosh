@@ -1,4 +1,4 @@
-import { AuthAction } from "../reducers/authReducer";
+import { AuthAction } from "./AuthProvider";
 import { Dispatch } from "react";
 import React from "react";
 
