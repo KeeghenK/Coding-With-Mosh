@@ -1,17 +1,31 @@
 import { createBrowserRouter } from 'react-router-dom';
+import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import Layout from './Layout';
-import UserDetailPage from './UserDetailPage';
-import UserListPage from './UserListPage';
+import LoginPage from './LoginPage';
+import PrivateRoutes from './PrivateRoutes';
+import UserDetail from './UserDetail';
+import UserList from './UserList';
+import UsersPage from './UsersPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
-      { path: '', element: <HomePage /> },
-      { path: 'users', element: <UserListPage /> },
-      { path: 'users/:id', element: <UserDetailPage /> },
+      { index: true, element: <HomePage /> },
+      { path: '/login', element: <LoginPage /> },
+    ],
+  },
+  {
+    element: <PrivateRoutes />,
+    children: [
+      {
+        path: 'users',
+        element: <UsersPage />,
+        children: [{ path: ':id', element: <UserDetail /> }],
+      },
     ],
   },
 ]);
